@@ -1,8 +1,3 @@
-// 基于 jsPsych 的实验程序
-// 作者：叶一杉
-// 学号：202211061028
-// 日期：2024-3-2
-
 // 初始化 jsPsych
 let exp = initJsPsych()
 
@@ -11,12 +6,6 @@ let timeline = []
 
 // 导入试次生成函数
 import generateBlock from './block.js'
-
-// 预加载图片
-timeline.push({
-  type: jsPsychPreload,
-  auto_preload: true
-})
 
 // 全屏指导语
 timeline.push({
@@ -34,19 +23,16 @@ timeline.push({
   type: jsPsychHtmlButtonResponse,
   stimulus: `
     <p>欢迎参加实验！</p>
-    <p>本实验分为两部分，第一部分是学习阶段，第二部分是测试阶段。</p>
-    ...还没写完
+    <p>...还没写完</p>
   `,
   choices: ['开始实验']
 })
 
 // 获取人口学信息
 
+// 正式实验开始
 // 将生成好的 block 加入时间线
-console.log(generateBlock('CC'))
-
-// 按随即顺序将各个 block 加入时间线
-
+console.log(generateBlock())
 
 // 结束语
 timeline.push({
@@ -76,7 +62,7 @@ timeline.push({
       // 运行实验
       await exp.run(timeline)
       // 获取实验数据
-      let data = exp.data.get()
+      const data = exp.data.get()
       console.log(data)
       // 处理数据
 
