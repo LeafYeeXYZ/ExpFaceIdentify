@@ -1,5 +1,8 @@
 // 初始化 jsPsych
-const exp = initJsPsych()
+const exp = initJsPsych({
+  show_progress_bar: true,
+  message_progress_bar: '实验进度'
+})
 
 // 声明实验流程时间线
 const timeline = []
@@ -14,7 +17,10 @@ timeline.push({
     <p>为避免干扰，本实验将全屏进行</p>
     <p>如您同意，请点击下方按钮继续实验</p>
   `,
-  button_label: '继续'
+  button_label: '继续',
+  data: {
+    shouldSave: false
+  }
 })
 
 // 指导语
@@ -24,7 +30,10 @@ timeline.push({
     <p>欢迎参加实验！</p>
     <p>...还没写完</p>
   `,
-  choices: ['开始实验']
+  choices: ['开始实验'],
+  data: {
+    shouldSave: false
+  }
 })
 
 // 获取人口学信息
@@ -33,6 +42,7 @@ timeline.push({
   pages: [
     [
       {
+        name: 'intro',
         type: 'html',
         prompt: '正式实验前，我们需要收集您的一些基本信息'
       },
@@ -52,17 +62,22 @@ timeline.push({
       }
     ]
   ],
-  button_label_finish: '继续'
+  button_label_finish: '继续',
+  data: {
+    shouldSave: true
+  }
 })
 timeline.push({
   type: jsPsychSurvey,
   pages: [
     [
       {
+        name: 'intro',
         type: 'html',
         prompt: '正式实验前，我们需要收集您的一些基本信息'
       },
       {
+        name: 'cnStarFamiliar',
         type: 'likert',
         prompt: '您对中国明星的熟悉程度',
         required: true,
@@ -77,6 +92,7 @@ timeline.push({
         ]
       },
       {
+        name: 'krStarFamiliar',
         type: 'likert',
         prompt: '您对韩国明星的熟悉程度',
         required: true,
@@ -92,7 +108,10 @@ timeline.push({
       }
     ]
   ],
-  button_label_finish: '继续'
+  button_label_finish: '继续',
+  data: {
+    shouldSave: true
+  }
 })
 
 // 正式实验提示
@@ -101,7 +120,10 @@ timeline.push({
   stimulus: `
     <p>实验即将正式开始</p>
   `,
-  choices: ['继续']
+  choices: ['继续'],
+  data: {
+    shouldSave: false
+  }
 })
 
 // 正式实验开始
@@ -116,7 +138,10 @@ for (let i = 0; i < 3; i++) {
     stimulus: `
       <p>第 ${i + 1} / 3 个小节</p>
     `,
-    choices: ['开始']
+    choices: ['开始'],
+    data: {
+      shouldSave: false
+    }
   })
   timeline.push(...generateBlock(block[i]))
   timeline.push({
@@ -125,7 +150,10 @@ for (let i = 0; i < 3; i++) {
       <p>已完成 ${i + 1} / 3 个小节</p>
       <p>您现在可以休息一下</p>
     `,
-    choices: ['继续']
+    choices: ['继续'],
+    data: {
+      shouldSave: false
+    }
   })
 }
 
@@ -136,13 +164,19 @@ timeline.push({
     <p>实验结束！</p>
     <p>感谢您的参与！</p>
   `,
-  choices: ['结束实验']
+  choices: ['结束实验'],
+  data: {
+    shouldSave: false
+  }
 })
 
 // 退出全屏
 timeline.push({
   type: jsPsychFullscreen,
-  fullscreen_mode: false
+  fullscreen_mode: false,
+  data: {
+    shouldSave: false
+  }
 })
 
 // 运行实验
@@ -157,9 +191,22 @@ timeline.push({
       // 运行实验
       await exp.run(timeline)
       // 获取实验数据
-      const data = exp.data.get()
-      console.log(data)
+      let data = exp.data.get().trials
       // 处理数据
+      data = data.filter(ele => ele.shouldSave)
+      data.forEach(ele => {
+        delete ele.shouldSave
+        delete ele.stimulus
+        delete ele.time_elapsed
+        delete ele.internal_node_id
+        delete ele.trial_index
+        delete ele.trial_type
+        if (ele.response === 0) ele.response = '出现过'
+        if (ele.response === 1) ele.response = '没出现过'
+        if (typeof ele.accuracy) delete ele.accuracy
+      })
+
+      console.log(data)
 
       // 上传数据
 

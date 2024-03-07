@@ -83,7 +83,7 @@ export default function generateBlock(block) {
   // 生成再认试次
   for (let i = 0; i < 6; i++) {
     for (let j = 4; j < 8; j++) {
-      recogTrial.push(tlRecog, stimulus[block].m[i][j])
+      (i === targetM[0] || i === targetM[1]) ? recogTrial.push(tlRecog, stimulus[block].m[i][j], true, block) : recogTrial.push(tlRecog, stimulus[block].m[i][j], false, block)
     }
   }
   // 随机化数组
@@ -105,6 +105,9 @@ class studyTrial {
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
     `
     this.choices = ['男性', '女性']
+    this.data = {
+      shouldSave: false
+    }
   }
   static push(timeline, stm) {
     const trial = new studyTrial(stm)
@@ -113,16 +116,21 @@ class studyTrial {
 }
 // 生成再认试次的类
 class recogTrial {
-  constructor(stm) {
+  constructor(stm, isTarget, block) {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
       <p>请判断这个人是否在学习阶段出现过</p>
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
     `
     this.choices = ['出现过', '没出现过']
+    this.data = {
+      shouldSave: true,
+      correctResponse: isTarget ? '出现过' : '没出现过',
+      stimulusType: block
+    }
   }
-  static push(timeline, stm) {
-    const trial = new recogTrial(stm)
+  static push(timeline, stm, isTarget, block) {
+    const trial = new recogTrial(stm, isTarget, block)
     timeline.push(trial)
   }
 }
