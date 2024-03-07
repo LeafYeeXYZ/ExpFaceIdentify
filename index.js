@@ -4,9 +4,6 @@ const exp = initJsPsych()
 // 声明实验流程时间线
 const timeline = []
 
-// 导入试次生成函数
-import generateBlock from './block.js'
-
 // -------------------------------------------------------
 
 // 全屏指导语
@@ -68,6 +65,7 @@ timeline.push({
       {
         type: 'likert',
         prompt: '您对中国明星的熟悉程度',
+        required: true,
         likert_scale_min_label: '完全不熟悉',
         likert_scale_max_label: '非常熟悉',
         likert_scale_values: [
@@ -81,6 +79,7 @@ timeline.push({
       {
         type: 'likert',
         prompt: '您对韩国明星的熟悉程度',
+        required: true,
         likert_scale_min_label: '完全不熟悉',
         likert_scale_max_label: '非常熟悉',
         likert_scale_values: [
@@ -96,9 +95,20 @@ timeline.push({
   button_label_finish: '继续'
 })
 
+// 正式实验提示
+timeline.push({
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `
+    <p>实验即将正式开始</p>
+  `,
+  choices: ['继续']
+})
+
 // 正式实验开始
+// 导入试次生成函数
+import generateBlock from './block.js'
 // 将生成好的 block 加入时间线
-console.log(generateBlock())
+timeline.push(...generateBlock('cnStar'))
 
 // 结束语
 timeline.push({
