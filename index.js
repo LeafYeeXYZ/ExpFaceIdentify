@@ -1,11 +1,13 @@
 // 初始化 jsPsych
-let exp = initJsPsych()
+const exp = initJsPsych()
 
 // 声明实验流程时间线
-let timeline = []
+const timeline = []
 
 // 导入试次生成函数
 import generateBlock from './block.js'
+
+// -------------------------------------------------------
 
 // 全屏指导语
 timeline.push({
@@ -29,6 +31,70 @@ timeline.push({
 })
 
 // 获取人口学信息
+timeline.push({
+  type: jsPsychSurvey,
+  pages: [
+    [
+      {
+        type: 'html',
+        prompt: '正式实验前，我们需要收集您的一些基本信息'
+      },
+      {
+        name: 'gender',
+        type: 'drop-down',
+        prompt: '您的性别',
+        options: ['男', '女', '其他'],
+        required: true
+      },
+      {
+        name: 'age',
+        type: 'text',
+        prompt: '您的年龄',
+        input_type: 'number',
+        required: true
+      }
+    ]
+  ],
+  button_label_finish: '继续'
+})
+timeline.push({
+  type: jsPsychSurvey,
+  pages: [
+    [
+      {
+        type: 'html',
+        prompt: '正式实验前，我们需要收集您的一些基本信息'
+      },
+      {
+        type: 'likert',
+        prompt: '您对中国明星的熟悉程度',
+        likert_scale_min_label: '完全不熟悉',
+        likert_scale_max_label: '非常熟悉',
+        likert_scale_values: [
+          { value: 1 },
+          { value: 2 },
+          { value: 3 },
+          { value: 4 },
+          { value: 5 }
+        ]
+      },
+      {
+        type: 'likert',
+        prompt: '您对韩国明星的熟悉程度',
+        likert_scale_min_label: '完全不熟悉',
+        likert_scale_max_label: '非常熟悉',
+        likert_scale_values: [
+          { value: 1 },
+          { value: 2 },
+          { value: 3 },
+          { value: 4 },
+          { value: 5 }
+        ]
+      }
+    ]
+  ],
+  button_label_finish: '继续'
+})
 
 // 正式实验开始
 // 将生成好的 block 加入时间线
