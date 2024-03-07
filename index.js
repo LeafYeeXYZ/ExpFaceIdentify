@@ -107,8 +107,27 @@ timeline.push({
 // 正式实验开始
 // 导入试次生成函数
 import generateBlock from './block.js'
-// 将生成好的 block 加入时间线
-timeline.push(...generateBlock('cnStar'))
+// 定义三个 block
+const block = ['cnStar', 'krStar', 'cnStar'].sort(() => Math.random() - 0.5)
+// 生成时间线
+for (let i = 0; i < 3; i++) {
+  timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+      <p>第 ${i + 1} / 3 个小节</p>
+    `,
+    choices: ['开始']
+  })
+  timeline.push(...generateBlock(block[i]))
+  timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+      <p>已完成 ${i + 1} / 3 个小节</p>
+      <p>您现在可以休息一下</p>
+    `,
+    choices: ['继续']
+  })
+}
 
 // 结束语
 timeline.push({

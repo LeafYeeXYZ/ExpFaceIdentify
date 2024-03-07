@@ -28,8 +28,16 @@ export default function generateBlock(block) {
   // 预加载图片
   timeline.push({
     type: jsPsychPreload,
-    auto_preload: true
+    images: [...stimulus[block].f[0], ...stimulus[block].f[1], ...stimulus[block].m[0], ...stimulus[block].m[1], ...stimulus[block].m[2], ...stimulus[block].m[3], ...stimulus[block].m[4], ...stimulus[block].m[5]]
   })
+  // 标记目标男性
+  const targetM = []
+  for (let i = 0; i < 2; i++) {
+    targetM.push(Math.floor(Math.random() * 6))
+    while (i === 1 && targetM[0] === targetM[1]) {
+      targetM[1] = Math.floor(Math.random() * 6)
+    }
+  }
 
   // ---------------------------------------------------
 
@@ -42,11 +50,6 @@ export default function generateBlock(block) {
     `,
     choices: ['开始']
   })
-  // 随机选取 2 个目标男性
-  const targetM = []
-  for (let i = 0; i < 2; i++) {
-    targetM.push(Math.floor(Math.random() * 6))
-  }
 
   // 将指定试次加入数组
   // 女性
@@ -55,9 +58,11 @@ export default function generateBlock(block) {
       studyTrial.push(tlStudy, subValue)
     }
   }
-
-
-
+  // 男性
+  for (let i = 0; i < 4; i++) {
+    studyTrial.push(tlStudy, stimulus[block].m[targetM[0]][i])
+    studyTrial.push(tlStudy, stimulus[block].m[targetM[1]][i])
+  }
 
   // 随机化数组
   tlStudy.sort(() => Math.random() - 0.5)
@@ -75,6 +80,16 @@ export default function generateBlock(block) {
     `,
     choices: ['开始']
   })
+  // 生成再认试次
+  for (let i = 0; i < 6; i++) {
+    for (let j = 4; j < 8; j++) {
+      recogTrial.push(tlRecog, stimulus[block].m[i][j])
+    }
+  }
+  // 随机化数组
+  tlRecog.sort(() => Math.random() - 0.5)
+  // 拼接到主时间线
+  timeline.push(...tlRecog)
 
   // ---------------------------------------------------
 
@@ -93,6 +108,21 @@ class studyTrial {
   }
   static push(timeline, stm) {
     const trial = new studyTrial(stm)
+    timeline.push(trial)
+  }
+}
+// 生成再认试次的类
+class recogTrial {
+  constructor(stm) {
+    this.type = jsPsychHtmlButtonResponse
+    this.stimulus = `
+      <p>请判断这个人是否在学习阶段出现过</p>
+      <img src="${stm}" style="width: 200px; height: 200px;">
+    `
+    this.choices = ['出现过', '没出现过']
+  }
+  static push(timeline, stm) {
+    const trial = new recogTrial(stm)
     timeline.push(trial)
   }
 }
