@@ -5,3 +5,38 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
+.sv_main .sv_container .sv_body .sv_nav .sv_nav_btn,
+.jspsych-btn {
+  --textcolor: #ff7171;
+  --textcolor-hover: #ff4f4f;
+  --backcolor: #ffe1e1;
+  --backcolor-hover: #ffcece;
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  transition: all 0.2s ease;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: var(--textcolor);
+  background-color: var(--backcolor);
+  &:hover {
+    transform: scale(1.02);
+    background-color: var(--backcolor-hover);
+    color: var(--textcolor-hover);
+  }
+  &:active {
+    transform: scale(0.98);
+    background-color: var(--backcolor-hover);
+    color: var(--textcolor-hover);
+  }
+  &:disabled {
+    cursor: progress;
+  }
+}
+
+.sv_main .sv_container .sv_body .sv_nav .sv_nav_btn {
+  line-height: 20px;
+}

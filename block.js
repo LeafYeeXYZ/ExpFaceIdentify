@@ -102,7 +102,7 @@ class studyTrial {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
       <p>请尽量记住图中人物，并尽快判断性别</p>
-      <img src="${stm}" style="width: 200px; height: 200px;">
+      <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
     `
     this.choices = ['男性', '女性']
   }
@@ -117,7 +117,7 @@ class recogTrial {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
       <p>请判断这个人是否在学习阶段出现过</p>
-      <img src="${stm}" style="width: 200px; height: 200px;">
+      <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
     `
     this.choices = ['出现过', '没出现过']
   }
