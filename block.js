@@ -33,6 +33,7 @@ function insertDurationTrial(timeline) {
       stimulus: `
         <img src="/cross.jpg" style="width: 200px; height: 200px; margin: 20px 0;">
         <p>&nbsp;</p>
+        <p>&nbsp;</p>
       `,
       trial_duration: config.TRIAL_DURATION
     }, value)
@@ -46,7 +47,8 @@ class studyTrial {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
-      <p>请尽量记住图中人物，并尽快判断人物的性别</p>
+      <p>请尽量记住图中人物</p>
+      <p>并尽快判断人物的性别</p>
     `
     this.choices = ['男性', '女性']
     this.on_start = function () {
@@ -67,7 +69,7 @@ class recogTrial {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
-      <p>请判断该人物是否在学习阶段出现过</p>
+      <p>该人物是否在上半部分出现过</p>
     `
     this.choices = ['出现过', '没出现过']
     this.data = {
@@ -87,14 +89,14 @@ class recogTrial {
  * @returns {array} 随机生成的算术题
  */
 function makeCalc() {
-  let res = [[], [], [], [], []]
+  let res = [[], [], [], [], [], [], [], [], [], []]
   for (let i = 0; i < res.length; i++) {
     for (let j = 0; j < 3; j++) {
       if (j === 0) {
         res[i].push({
           name: Math.random().toString(36),
           type: 'html',
-          prompt: '请计算以下算式，并选择正确的答案'
+          prompt: '请计算下面的算式，并填写答案'
         })
       } else {
         res[i].push({
