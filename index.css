@@ -40,3 +40,24 @@ body {
 .sv_main .sv_container .sv_body .sv_nav .sv_nav_btn {
   line-height: 20px;
 }
+
+.sv_q_dropdown_control,
+.sv_q_text_root {
+  border-radius: 20px;
+}
+.sv_select_wrapper::before {
+  border-radius: 0 20px 20px 0;
+}
+
+.sv_q_rating {
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  padding: 0 15px;
+}
+
+/* require 没输入的错误提示框 */
+.sv_q_erbox.sv_qstn_error_top {
+  border-radius: 20px;
+  padding-top: 5px!important;
+  padding-bottom: 5px!important;
+}
