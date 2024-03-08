@@ -15,14 +15,40 @@
 import stimulus from './stimulus.js'
 // stimulus.cnStar/krStar/cnNorm.m[0-5][0-7]
 // stimulus.cnStar/krStar/cnNorm.f[0-1][0-3]
+// 导入设置
+import config from './config.js'
+
+/**
+ * 插入每个试次前的间隔十字
+ * @param {array} timeline 
+ * @returns 插入后的时间线
+ */
+function insertDurationTrial(timeline) {
+  let response = []
+  for (const value of timeline) {
+    response.push({
+      type: jsPsychHtmlKeyboardResponse,
+      choices: "NO_KEYS",
+      stimulus: `
+        <img src="/cross.jpg" style="width: 200px; height: 200px; margin: 20px 0;">
+        <p>&nbsp;</p>
+      `,
+      trial_duration: config.TRIAL_DURATION,
+      data: {
+        shouldSave: false
+      }
+    }, value)
+  }
+  return response
+}
 
 // 生成学习试次的类
 class studyTrial {
   constructor(stm) {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
-      <p>请尽量记住图中人物，并尽快判断性别</p>
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
+      <p>请尽量记住图中人物，并尽快判断性别</p>
     `
     this.choices = ['男性', '女性']
     this.data = {
@@ -40,8 +66,8 @@ class recogTrial {
   constructor(stm, isTarget, block) {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
-      <p>请判断这个人是否在学习阶段出现过</p>
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
+      <p>请判断这个人是否在学习阶段出现过</p>
     `
     this.choices = ['出现过', '没出现过']
     this.data = {
@@ -67,7 +93,7 @@ function generateBlock(block) {
   // 预加载图片
   timeline.push({
     type: jsPsychPreload,
-    images: [...stimulus[block].f[0], ...stimulus[block].f[1], ...stimulus[block].m[0], ...stimulus[block].m[1], ...stimulus[block].m[2], ...stimulus[block].m[3], ...stimulus[block].m[4], ...stimulus[block].m[5]]
+    images: [...stimulus[block].f[0], ...stimulus[block].f[1], ...stimulus[block].m[0], ...stimulus[block].m[1], ...stimulus[block].m[2], ...stimulus[block].m[3], ...stimulus[block].m[4], ...stimulus[block].m[5], './cross.jpg']
   })
   // 标记目标男性
   const targetM = []
@@ -100,6 +126,8 @@ function generateBlock(block) {
   }
   // 随机化数组
   tlStudy.sort(() => Math.random() - 0.5)
+  // 插入试次间间隔的十字提示
+  tlStudy = insertDurationTrial(tlStudy)
   // 拼接到主时间线
   timeline.push(...tlStudy)
 
@@ -120,6 +148,8 @@ function generateBlock(block) {
   }
   // 随机化数组
   tlRecog.sort(() => Math.random() - 0.5)
+  // 插入试次间间隔的十字提示
+  tlRecog = insertDurationTrial(tlRecog)
   // 拼接到主时间线
   timeline.push(...tlRecog)
 
@@ -132,7 +162,7 @@ const timeline = []
 // 定义三个 block
 const block = ['cnStar', 'krStar', 'cnNorm'].sort(() => Math.random() - 0.5)
 // 生成时间线
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < config.BLOCKS; i++) {
   timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `

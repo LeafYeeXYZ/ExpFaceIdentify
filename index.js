@@ -1,14 +1,11 @@
-// 初始化 jsPsych
-const exp = initJsPsych({
-  show_progress_bar: true,
-  message_progress_bar: '实验进度'
-})
 // 引入外部模块
 import startTimeline from './start.js'
 import blockTimeline from './block.js'
 import endTimeline from './end.js'
-import calDate from './data.js'
+import config from './config.js'
 import calcData from './data.js'
+// 初始化 jsPsych
+const exp = config.SHOW_BAR ? initJsPsych({ show_progress_bar: true, message_progress_bar: '实验进度' }) : initJsPsych()
 // 声明实验流程时间线
 const timeline = [...startTimeline, ...blockTimeline, ...endTimeline]
 
@@ -22,6 +19,7 @@ end.js --- 结束语和退出全屏
 其他文件
 stimulus.js --- 刺激的路径
 data.js --- 原始数据处理函数
+config.js --- 调试用，设置一些参数
 */
 
 // 运行实验
