@@ -17,6 +17,7 @@ import stimulus from './stimulus.js'
 // stimulus.cnStar/krStar/cnNorm.f[0-1][0-3]
 // 导入设置
 import config from './config.js'
+import { exp } from './index.js'
 
 /**
  * 插入每个试次前的间隔十字
@@ -33,10 +34,7 @@ function insertDurationTrial(timeline) {
         <img src="/cross.jpg" style="width: 200px; height: 200px; margin: 20px 0;">
         <p>&nbsp;</p>
       `,
-      trial_duration: config.TRIAL_DURATION,
-      data: {
-        shouldSave: false
-      }
+      trial_duration: config.TRIAL_DURATION
     }, value)
   }
   return response
@@ -48,11 +46,13 @@ class studyTrial {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
-      <p>请尽量记住图中人物，并尽快判断性别</p>
+      <p>请尽量记住图中人物，并尽快判断人物的性别</p>
     `
     this.choices = ['男性', '女性']
-    this.data = {
-      shouldSave: false
+    this.on_start = function () {
+      exp.pluginAPI.setTimeout(() => {
+        exp.finishTrial()        
+      }, config.STUDY_IMAGE_DURATION)
     }
   }
   static push(timeline, stm) {
@@ -67,7 +67,7 @@ class recogTrial {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
-      <p>请判断这个人是否在学习阶段出现过</p>
+      <p>请判断该人物是否在学习阶段出现过</p>
     `
     this.choices = ['出现过', '没出现过']
     this.data = {
@@ -80,6 +80,34 @@ class recogTrial {
     const trial = new recogTrial(stm, isTarget, block)
     timeline.push(trial)
   }
+}
+
+/**
+ * 生成随机的三位数减法
+ * @returns {array} 随机生成的算术题
+ */
+function makeCalc() {
+  let res = [[], [], [], [], []]
+  for (let i = 0; i < res.length; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (j === 0) {
+        res[i].push({
+          name: Math.random().toString(36),
+          type: 'html',
+          prompt: '请计算以下算式，并选择正确的答案'
+        })
+      } else {
+        res[i].push({
+          name: Math.random().toString(36),
+          type: 'text',
+          prompt: `${Math.floor(Math.random() * 500 + 500)} - ${Math.floor(Math.random() * 500)} =`,
+          input_type: 'number',
+          required: true
+        })
+      }
+    }
+  }
+  return res
 }
 
 /**
@@ -109,7 +137,10 @@ function generateBlock(block) {
   timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `
-      <p>学习阶段</p>
+      <p>请尽量记住图中人物</p>
+      <p>并尽快判断人物的性别</p>
+      <p>每张照片最多呈现 4s</p>
+      <p>超时则视为回答错误</p>
     `,
     choices: ['开始']
   })
@@ -136,9 +167,35 @@ function generateBlock(block) {
   timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `
-      <p>再认阶段</p>
+      <p>现在，请您完成一些简单的计算</p>
+      <p>请在确保结果正确的情况下，尽快完成</p>
+      <p>无论您是否完成所有题目</p>
+      <p>30s 后将开始本小节的下一个部分</p>
     `,
-    choices: ['开始']
+    choices: ['继续']
+  })
+  // 等待 30s，并要求被试进行三位数减法
+  timeline.push({
+    type: jsPsychSurvey,
+    pages: makeCalc(),
+    title: '',
+    button_label_next: '下一页',
+    button_label_back: '上一页',
+    button_label_finish: '提交',
+    on_start: function () {
+      exp.pluginAPI.setTimeout(() => {
+        exp.finishTrial()        
+      }, config.STUDY_TEST_DURATION)
+    }
+  })
+  timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+      <p>接下来，您将看到一些照片</p>
+      <p>请判断该人物是否在本小节的前半段</p>
+      <p>也就是您刚刚看到的照片中出现过</p>
+    `,
+    choices: ['继续']
   })
   // 生成再认试次
   for (let i = 0; i < 6; i++) {
@@ -166,25 +223,21 @@ for (let i = 0; i < config.BLOCKS; i++) {
   timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `
-      <p>第 ${i + 1} / 3 个小节</p>
+      <p style="font-weight: bold;">第 ${i + 1} / 3 个小节</p>
     `,
-    choices: ['开始'],
-    data: {
-      shouldSave: false
-    }
+    choices: ['开始']
   })
   timeline.push(...generateBlock(block[i]))
-  timeline.push({
-    type: jsPsychHtmlButtonResponse,
-    stimulus: `
-      <p>已完成 ${i + 1} / 3 个小节</p>
-      <p>您现在可以休息一下</p>
-    `,
-    choices: ['继续'],
-    data: {
-      shouldSave: false
-    }
-  })
+  if (i !== config.BLOCKS - 1) {
+    timeline.push({
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>已完成 ${i + 1} / 3 个小节</p>
+        <p>试次间间隔的形式还没想好</p>
+      `,
+      choices: ['继续']
+    })
+  }
 }
 
 export default timeline

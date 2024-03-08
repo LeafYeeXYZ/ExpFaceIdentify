@@ -3,21 +3,16 @@ const timeline = [
   {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
-      <p>实验结束！</p>
-      <p>感谢您的参与！</p>
+      <p>实验即将结束</p>
+      <p>点击结束实验后，请等待数据上传</p>
+      <p>待屏幕上出现提示后，再关闭网页</p>
     `,
     choices: ['结束实验'],
-    data: {
-      shouldSave: false
-    }
   },
   // 退出全屏
   {
     type: jsPsychFullscreen,
     fullscreen_mode: false,
-    data: {
-      shouldSave: false
-    }
   }
 ]
 

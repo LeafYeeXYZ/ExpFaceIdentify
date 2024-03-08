@@ -3,33 +3,29 @@ const timeline = [
     type: jsPsychFullscreen,
     fullscreen_mode: true,
     message: `
-      <p>为避免干扰，本实验将全屏进行</p>
-      <p>如您同意，请点击下方按钮继续实验</p>
+      <p style="font-weight: bold;">为避免干扰，本实验将全屏进行</p>
     `,
-    button_label: '继续',
-    data: {
-      shouldSave: false
-    }
+    button_label: '进入全屏',
   },
   { // 指导语
     type: jsPsychHtmlButtonResponse,
     stimulus: `
-      <p>欢迎参加实验！</p>
-      <p>...还没写完</p>
+      <p>欢迎参加本实验</p>
+      <p>在正式实验开始前</p>
+      <p>我们需要收集您的一些基本信息</p>
+      <p>信息不涉及个人隐私</p>
+      <p>并且仅用于科研目的</p>
     `,
     choices: ['开始实验'],
-    data: {
-      shouldSave: false
-    }
   },
   { // 人口学信息
     type: jsPsychSurvey,
     pages: [
       [
         {
-          name: 'intro',
+          name: 'deviceWidth',
           type: 'html',
-          prompt: '正式实验前，我们需要收集您的一些基本信息'
+          prompt: ''
         },
         {
           name: 'gender',
@@ -48,6 +44,7 @@ const timeline = [
       ]
     ],
     button_label_finish: '继续',
+    required_error: '请填写此项',
     data: {
       shouldSave: true
     }
@@ -57,9 +54,9 @@ const timeline = [
     pages: [
       [
         {
-          name: 'intro',
+          name: 'deviceHeight',
           type: 'html',
-          prompt: '正式实验前，我们需要收集您的一些基本信息'
+          prompt: ''
         },
         {
           name: 'cnStarFamiliar',
@@ -94,19 +91,18 @@ const timeline = [
       ]
     ],
     button_label_finish: '继续',
+    required_error: '请填写此项',
     data: {
       shouldSave: true
     }
   },
-  { // 实验开始提示
+  { // 指导语
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <p>实验即将正式开始</p>
+      <p>指导语还没写好</p>
     `,
-    choices: ['继续'],
-    data: {
-      shouldSave: false
-    }
+    choices: ['开始实验'],
   }
 ]
 

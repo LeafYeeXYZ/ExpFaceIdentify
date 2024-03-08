@@ -6,6 +6,12 @@ body {
   overflow: hidden;
 }
 
+p {
+  font-size: 1.2rem!important;
+  margin-top: 0!important;
+  margin-bottom: 12px!important;
+}
+
 .sv_main .sv_container .sv_body .sv_nav .sv_nav_btn,
 .jspsych-btn {
   --textcolor: #ff7171;
@@ -37,6 +43,10 @@ body {
   }
 }
 
+.jspsych-btn {
+  margin-top: 20px;
+}
+
 .sv_main .sv_container .sv_body .sv_nav .sv_nav_btn {
   line-height: 20px;
 }
@@ -47,6 +57,7 @@ body {
 }
 .sv_select_wrapper::before {
   border-radius: 0 20px 20px 0;
+  position: absolute;
 }
 
 .sv_q_rating {
