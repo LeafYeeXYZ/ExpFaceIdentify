@@ -40,9 +40,25 @@ config.js --- 调试用，设置一些参数
     data.deviceWidth = window.screen.width
     data.deviceHeight = window.screen.height
     data.deviceMin = Math.min(window.screen.width, window.screen.height)
+    // 显示正在上传数据页面
+    document.body.innerHTML = `
+      <h1>正在上传实验数据</h1>
+      <h1>请勿关闭网页</h1>
+    `
     // 上传数据
-    console.log(data)
-    await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
+    config.DEV && console.log('准备上传', data)
+    try {
+      config.DEV && console.log('第一次尝试上传数据')
+      await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
+    } catch (err) {
+      try {
+        config.DEV && console.log('第二次尝试上传数据')
+        await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
+      } catch (err) {
+        config.DEV && console.log('第三次尝试上传数据')
+        await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
+      }
+    }
     // 显示结束页面
     document.body.innerHTML = `
       <h1>实验数据已上传</h1>
@@ -50,12 +66,9 @@ config.js --- 调试用，设置一些参数
       <h1>您现在可以关闭网页</h1>
     `
   } catch (err) {
-    alert(`
-      实验出错，请联系主试
-      错误信息：
-      ${err}
-    `)
-    document.body.innerHTML = '<h1>实验出错</h1>'
+    document.body.innerHTML = `
+      <h1>实验出错，请联系主试</h1>
+      <p>错误信息：${err}</p>`
   }
 })()
 

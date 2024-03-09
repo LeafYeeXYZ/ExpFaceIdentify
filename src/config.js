@@ -8,6 +8,6 @@ export default {
   SHOW_BAR: false, // 是否显示顶部的实验进度条
   TOFIXED: 4, // 上传的数据保留的小数点位数
   // --- 服务器相关 ---
-  SERVER: 'https://expapi.leafyee.xyz', // 服务器地址
+  SERVER: 'https://expapi.leafyee.xyz', // 服务器地址，应为 'https://expapi.leafyee.xyz'
   DEV: true // 是否为还未进入正式实验阶段
 }
