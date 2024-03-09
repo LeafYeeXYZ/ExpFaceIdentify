@@ -55,6 +55,9 @@ class studyTrial {
       exp.pluginAPI.setTimeout(() => {
         exp.finishTrial()        
       }, config.STUDY_IMAGE_DURATION)
+    },
+    this.data = {
+      trialType: 'study'
     }
   }
   static push(timeline, stm) {
@@ -75,7 +78,8 @@ class recogTrial {
     this.data = {
       shouldSave: true,
       correctResponse: isTarget ? '出现过' : '没出现过',
-      stimulusType: block
+      stimulusType: block,
+      trialType: 'recog'
     }
   }
   static push(timeline, stm, isTarget, block) {

@@ -8,6 +8,13 @@ import calcData from './data.js'
 export const exp = config.SHOW_BAR ? initJsPsych({ show_progress_bar: true, message_progress_bar: '实验进度' }) : initJsPsych()
 // 声明实验流程时间线
 const timeline = [...startTimeline, ...blockTimeline, ...endTimeline]
+// 禁用右键、选中、长按等操作
+if (config.NO_RIGHT_CLICK) {
+  document.addEventListener('contextmenu', event => event.preventDefault()) // 阻止右键
+  document.addEventListener('selectstart', event => event.preventDefault()) // 阻止选中
+  document.addEventListener('dblclick', event => event.preventDefault()) // 阻止双击
+  document.addEventListener('keydown', event => (event.key === 'F12' || event.key === 'F5') && event.preventDefault()) // 阻止 F12 和 F5
+}
 
 /*
 主文件 - index.js
@@ -28,34 +35,14 @@ config.js --- 调试用，设置一些参数
   try {
     // 运行实验
     await exp.run(timeline)
-    // 声明实验数据
-    let data = {
-      // 人口学信息
-      subject: {},
-      // 实验数据
-      trials: []
-    }
-    // 获取实验数据
-    data.trials = calcData(exp.data.get().trials)
-    data.subject = { ...data.trials.shift().response, ...data.trials.shift().response }
-    data.subject.deviceWidth = window.screen.width
-    data.subject.deviceHeight = window.screen.height
-    // 处理数据
-    data.subject.cnStarMeanRT = (data.trials.filter(trial => trial.stimulusType === 'cnStar').reduce((acc, cur) => acc + cur.rt, 0) / 24).toFixed(config.TOFIXED)
-    data.subject.krStarMeanRT = (data.trials.filter(trial => trial.stimulusType === 'krStar').reduce((acc, cur) => acc + cur.rt, 0) / 24).toFixed(config.TOFIXED)
-    data.subject.cnNormMeanRT = (data.trials.filter(trial => trial.stimulusType === 'cnNorm').reduce((acc, cur) => acc + cur.rt, 0) / 24).toFixed(config.TOFIXED)
-    data.subject.cnStarMeanCorrectRate = (data.trials.filter(trial => trial.stimulusType === 'cnStar').reduce((acc, cur) => acc + (cur.correctResponse === cur.response ? 1 : 0), 0) / 24).toFixed(config.TOFIXED)
-    data.subject.krStarMeanCorrectRate = (data.trials.filter(trial => trial.stimulusType === 'krStar').reduce((acc, cur) => acc + (cur.correctResponse === cur.response ? 1 : 0), 0) / 24).toFixed(config.TOFIXED)
-    data.subject.cnNormMeanCorrectRate = (data.trials.filter(trial => trial.stimulusType === 'cnNorm').reduce((acc, cur) => acc + (cur.correctResponse === cur.response ? 1 : 0), 0) / 24).toFixed(config.TOFIXED)
-    data.subject.cnStarStdRT = '还没实现'
-    data.subject.krStarStdRT = '还没实现'
-    data.subject.cnNormStdRT = '还没实现'
-    data.subject.cnStarStdCorrectRate = '还没实现'
-    data.subject.krStarStdCorrectRate = '还没实现'
-    data.subject.cnNormStdCorrectRate = '还没实现'
+    // 获取并处理实验数据
+    const data = calcData(exp.data.get())
+    data.deviceWidth = window.screen.width
+    data.deviceHeight = window.screen.height
+    data.deviceMin = Math.min(window.screen.width, window.screen.height)
     // 上传数据
-    console.log(data.subject)
-    console.log('上传数据还没实现')
+    console.log(data)
+    await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
     // 显示结束页面
     document.body.innerHTML = `
       <h1>实验数据已上传</h1>
