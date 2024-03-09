@@ -5,5 +5,5 @@ export default {
   STUDY_IMAGE_DURATION: 4 * 1000, // 学习阶段的图片最长呈现时间，应为 4 * 1000ms
   // --- 下面的一般不用改 ---
   SHOW_BAR: false, // 是否显示顶部的实验进度条
-  TOFIXED: 2, // 上传的数据保留的小数点位数
+  TOFIXED: 4, // 上传的数据保留的小数点位数
 }

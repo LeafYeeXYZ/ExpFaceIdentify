@@ -1,2 +1,4 @@
-createDemoImages.js
-avatar.jpg
+.parcel-cache
+package-lock.json
+node_modules
+dist
