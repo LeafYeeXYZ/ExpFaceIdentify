@@ -1,4 +1,5 @@
 import config from './config.js'
+import { genderTarget } from './stimulus.js'
 
 /**
  * 将原始数据转换为上传到数据库的数据
@@ -28,6 +29,8 @@ export default function calcData(data) {
   res.subject.studyTime = res.trials.filter(ele => ele.trialType === 'study').reduce((acc, cur) => acc + cur.rt, 0)
   // 再认阶段耗时
   res.subject.recogTime = res.trials.filter(ele => ele.trialType === 'recog').reduce((acc, cur) => acc + cur.rt, 0)
+  // 目标刺激的性别
+  res.subject.genderTarget = genderTarget
 
   // 处理数据，只留下人口学信息和再认阶段数据
   res.trials = res.trials.filter(ele => ele.shouldSave)

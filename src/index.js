@@ -17,17 +17,25 @@ if (config.NO_RIGHT_CLICK) {
 }
 
 /*
-主文件 - index.js
-样式文件 - indx.css
-网页文件 - index.html
-结构
-start.js --- 指导语和人口学信息
-block.js --- 正式实验
-end.js --- 结束语和退出全屏
-其他文件
-stimulus.js --- 刺激的路径
-data.js --- 原始数据处理函数
-config.js --- 调试用，设置一些参数
+src/
+  主文件 - index.js
+  样式文件 - indx.css
+  网页文件 - index.html
+  网页图标 - favicon.ico
+  start.js --- 指导语和人口学信息试次
+  block.js --- 正式实验试次
+  end.js --- 结束语和退出全屏试次
+  stimulus.js --- 存储刺激的路径
+  data.js --- 原始数据处理函数
+  config.js --- 实验参数配置
+static/
+  cross.jpg --- 黑色十字图片
+  CN_star --- 中国明星照片
+  KR_star --- 韩国明星照片
+  US_star --- 美国明星照片
+  CN_norm --- 中国普通人照片
+    M1_1 - M6_8 --- 男性照片
+    F1_1 - F6_8 --- 女性照片
 */
 
 // 运行实验
