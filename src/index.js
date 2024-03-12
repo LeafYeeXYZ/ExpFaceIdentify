@@ -35,16 +35,18 @@ config.js --- 调试用，设置一些参数
   try {
     // 运行实验
     await exp.run(timeline)
-    // 获取并处理实验数据
-    const data = calcData(exp.data.get())
-    data.deviceWidth = window.screen.width
-    data.deviceHeight = window.screen.height
-    data.deviceMin = Math.min(window.screen.width, window.screen.height)
     // 显示正在上传数据页面
     document.body.innerHTML = `
       <h1>正在上传实验数据</h1>
       <h1>请勿关闭网页</h1>
     `
+    // 获取并处理实验数据
+    const data = calcData(exp.data.get())
+    data.device = {
+      width: window.screen.width,
+      height: window.screen.height,
+      min: Math.min(window.screen.width, window.screen.height)
+    }
     // 上传数据
     config.DEV && console.log('准备上传', data)
     try {

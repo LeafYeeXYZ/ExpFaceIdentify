@@ -23,11 +23,6 @@ const timeline = [
     pages: [
       [
         {
-          name: 'deviceWidth',
-          type: 'html',
-          prompt: ''
-        },
-        {
           name: 'gender',
           type: 'drop-down',
           prompt: '您的性别',
@@ -53,11 +48,6 @@ const timeline = [
     type: jsPsychSurvey,
     pages: [
       [
-        {
-          name: 'deviceHeight',
-          type: 'html',
-          prompt: ''
-        },
         {
           name: 'cnStarFamiliar',
           type: 'likert',

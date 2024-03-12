@@ -12,12 +12,18 @@ export default function calcData(data) {
     // 实验数据暂存
     trials: data.trials
   }
-  // 实验是否完成
-  res.subject.valid = config.DEV ? '开发阶段数据' : '有效数据'
+  // 实验程序是否完成
+  res.subject.stage = config.STAGE
+  // 数据是否有效
+  if (res.trials.find(trial => trial.isDoneOrSerious).response.isDone === '以前参加过，不要使用这份数据' || res.trials.find(trial => trial.isDoneOrSerious).response.isSerious === '没有认真作答，不要使用此份数据') {
+    res.subject.valid = '重复或不认真作答数据'
+  } else {
+    res.subject.valid = '有效数据'
+  }
   // 当前时间
   res.subject.date = new Date().toLocaleString()
   // 总耗时
-  res.subject.totalTime = res.trials.reduce((acc, cur) => acc + (cur.rt ? cur.rt : 0), 0)
+  res.subject.totalTime = res.trials.at(-1).time_elapsed
   // 学习阶段耗时
   res.subject.studyTime = res.trials.filter(ele => ele.trialType === 'study').reduce((acc, cur) => acc + cur.rt, 0)
   // 再认阶段耗时
