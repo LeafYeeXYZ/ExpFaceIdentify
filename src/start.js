@@ -77,6 +77,21 @@ const timeline = [
             { value: 4 },
             { value: 5 }
           ]
+        },
+        {
+          name: 'usStarFamiliar',
+          type: 'likert',
+          prompt: '您对美国明星的熟悉程度',
+          required: true,
+          likert_scale_min_label: '完全不熟悉',
+          likert_scale_max_label: '非常熟悉',
+          likert_scale_values: [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+          ]
         }
       ]
     ],

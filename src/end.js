@@ -15,11 +15,6 @@ const timeline = [
     pages: [
       [
         {
-          name: 'xxx',
-          type: 'html',
-          prompt: '为保证数据有效性，恳请您如实回答以下问题'
-        },
-        {
           name: 'isDone',
           type: 'multi-choice',
           prompt: '您以前是否已经参加过此实验', // 如果改了选项文字，记得改 data.js 里的处理函数

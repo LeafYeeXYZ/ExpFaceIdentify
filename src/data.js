@@ -51,14 +51,17 @@ export default function calcData(data) {
   res.subject.cnStarMeanRT = (res.trials.filter(trial => trial.stimulusType === 'cnStar').reduce((acc, cur) => acc + cur.rt, 0) / 24).toFixed(config.TOFIXED)
   res.subject.krStarMeanRT = (res.trials.filter(trial => trial.stimulusType === 'krStar').reduce((acc, cur) => acc + cur.rt, 0) / 24).toFixed(config.TOFIXED)
   res.subject.cnNormMeanRT = (res.trials.filter(trial => trial.stimulusType === 'cnNorm').reduce((acc, cur) => acc + cur.rt, 0) / 24).toFixed(config.TOFIXED)
+  res.subject.usStarMeanRT = (res.trials.filter(trial => trial.stimulusType === 'usStar').reduce((acc, cur) => acc + cur.rt, 0) / 24).toFixed(config.TOFIXED)
   // 再认阶段正确率
   res.subject.cnStarCorrectRate = (res.trials.filter(trial => trial.stimulusType === 'cnStar').reduce((acc, cur) => acc + (cur.correctResponse === cur.response ? 1 : 0), 0) / 24).toFixed(config.TOFIXED)
   res.subject.krStarCorrectRate = (res.trials.filter(trial => trial.stimulusType === 'krStar').reduce((acc, cur) => acc + (cur.correctResponse === cur.response ? 1 : 0), 0) / 24).toFixed(config.TOFIXED)
   res.subject.cnNormCorrectRate = (res.trials.filter(trial => trial.stimulusType === 'cnNorm').reduce((acc, cur) => acc + (cur.correctResponse === cur.response ? 1 : 0), 0) / 24).toFixed(config.TOFIXED)
+  res.subject.usStarCorrectRate = (res.trials.filter(trial => trial.stimulusType === 'usStar').reduce((acc, cur) => acc + (cur.correctResponse === cur.response ? 1 : 0), 0) / 24).toFixed(config.TOFIXED)
   // 再认阶段反应时标准差
   res.subject.cnStarStdRT = Math.sqrt(res.trials.filter(trial => trial.stimulusType === 'cnStar').reduce((acc, cur) => acc + (cur.rt - res.subject.cnStarMeanRT) ** 2, 0) / (24 - 1)).toFixed(config.TOFIXED)
   res.subject.krStarStdRT = Math.sqrt(res.trials.filter(trial => trial.stimulusType === 'krStar').reduce((acc, cur) => acc + (cur.rt - res.subject.krStarMeanRT) ** 2, 0) / (24 - 1)).toFixed(config.TOFIXED)
   res.subject.cnNormStdRT = Math.sqrt(res.trials.filter(trial => trial.stimulusType === 'cnNorm').reduce((acc, cur) => acc + (cur.rt - res.subject.cnNormMeanRT) ** 2, 0) / (24 - 1)).toFixed(config.TOFIXED)
+  res.subject.usStarStdRT = Math.sqrt(res.trials.filter(trial => trial.stimulusType === 'usStar').reduce((acc, cur) => acc + (cur.rt - res.subject.usStarMeanRT) ** 2, 0) / (24 - 1)).toFixed(config.TOFIXED)
 
   return res.subject
 }

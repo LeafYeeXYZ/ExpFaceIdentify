@@ -1,16 +1,5 @@
 // 这个文件用于生成实验试次
 
-/**
- * 实验采取 “学习—再认” 范式进行。每个被试需完成 3 个群体所对应的 3 个 block 的实验，每个 block 都分为 “学习阶段” 和 “测验阶段”
- * 
- * 在学习阶段，给被试呈现 16 张照片 （男女各一半，女性照片为无关刺激；照片分属 4 人，每人 4 张），让被试判断照片中人物的性别，用鼠标点击对应的 “男性” 或 “女性” 按钮，并且要尽可能地记住照片上的面孔
- * 
- * 在测验阶段， 给被试呈现 24 张照片（都为男性；照片分属 6 人，每人 4 张；其中两人为学习阶段中的男性，学习和测验阶段所有照片不重复），要求被试需对照片中的人物是否在学习阶段见过进行辨认，用鼠标点击对应的 “这个人出现过” 或 “这个人没出现过” 按钮
- * 
- * 无论学习阶段还是测验阶段， 照片的最长呈现时间为 4s，若超时或被试点击按钮后照片立即消失，屏幕出现黑色十字 0.5s 作为提示。本实验中，照片呈现视角不做严格限制，但要求被试时刻注视屏幕中央。学习阶段和测验阶段间隔 30s，期间让被试进行三位数减法（指导语为 “为了确保您在认真进行实验，请计算以下算式，并选择正确的答案”）。每个 block 之间，被试有 1min 的休息时间
- * @author 小叶子
- */
-
 // 导入刺激路径
 import stimulus from './stimulus.js'
 // stimulus.cnStar/krStar/cnNorm.m[0-5][0-7]
@@ -82,6 +71,13 @@ class recogTrial {
       trialType: 'recog'
     }
   }
+  /**
+   * 向时间线中插入再认试次
+   * @param {array} timeline 时间线 
+   * @param {string} stm 刺激图片路径
+   * @param {boolean} isTarget 是否是目标人物 
+   * @param {string} block block 的对应人群 
+   */
   static push(timeline, stm, isTarget, block) {
     const trial = new recogTrial(stm, isTarget, block)
     timeline.push(trial)
@@ -118,7 +114,7 @@ function makeCalc() {
 
 /**
  * block 生成函数
- * @param {'cnStar' | 'krStar' | 'cnNorm'} block block 的对应人群 
+ * @param {'cnStar' | 'krStar' | 'cnNorm' | 'usStar'} block block 的对应人群 
  * @returns {array} timeline
  */
 function generateBlock(block) {
@@ -222,23 +218,21 @@ function generateBlock(block) {
 
 // 定义时间线
 const timeline = []
-// 定义三个 block
-const block = ['cnStar', 'krStar', 'cnNorm'].sort(() => Math.random() - 0.5)
 // 生成时间线
 for (let i = 0; i < config.BLOCKS; i++) {
   timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `
-      <p style="font-weight: bold;">第 ${i + 1} / 3 个小节</p>
+      <p style="font-weight: bold;">第 ${i + 1} / ${config.BLOCKS} 个小节</p>
     `,
     choices: ['开始']
   })
-  timeline.push(...generateBlock(block[i]))
+  timeline.push(...generateBlock(config.BLOCKS_ORDER[i]))
   if (i !== config.BLOCKS - 1) {
     timeline.push({
       type: jsPsychHtmlButtonResponse,
       stimulus: `
-        <p>已完成 ${i + 1} / 3 个小节</p>
+        <p>已完成 ${i + 1} / ${config.BLOCKS} 个小节</p>
         <p>试次间间隔的形式还没想好</p>
       `,
       choices: ['继续']

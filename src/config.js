@@ -1,6 +1,6 @@
 export default {
   TRIAL_DURATION: 500, // 试次间间隔，即十字出现时间，应为 500ms
-  BLOCKS: 3, // block 数，应为 3 个
+  BLOCKS: 4, // block 数，应为 4 个
   STUDY_TEST_DURATION: 30 * 1000, // 练习阶段和学习阶段的间隔，应为 30 * 1000ms
   // --- 服务器相关 ---
   SERVER: 'https://expapi.leafyee.xyz', // 服务器地址，应为 'https://expapi.leafyee.xyz'
@@ -11,4 +11,5 @@ export default {
   NO_RIGHT_CLICK: true, // 是否禁用右键、选中、长按等操作
   SHOW_BAR: false, // 是否显示顶部的实验进度条
   TOFIXED: 4, // 上传的数据保留的小数点位数
+  BLOCKS_ORDER: ['cnStar', 'krStar', 'cnNorm', 'usStar'].sort(() => Math.random() - 0.5), // block 的顺序
 }
