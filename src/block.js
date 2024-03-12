@@ -141,7 +141,7 @@ function generateBlock(block) {
     stimulus: `
       <p>请尽量记住图中人物</p>
       <p>并尽快判断人物的性别</p>
-      <p>每张照片最多呈现 4s</p>
+      <p>每张照片最多呈现 ${config.STUDY_IMAGE_DURATION / 1000} 秒</p>
       <p>超时则视为回答错误</p>
     `,
     choices: ['开始']
@@ -172,7 +172,7 @@ function generateBlock(block) {
       <p>现在，请您完成一些简单的计算</p>
       <p>请在确保结果正确的情况下，尽快完成</p>
       <p>无论您是否完成所有题目</p>
-      <p>30s 后将开始本小节的下一个部分</p>
+      <p>${config.STUDY_TEST_DURATION / 1000} 秒后将开始本小节的下一个部分</p>
     `,
     choices: ['继续']
   })
@@ -233,9 +233,11 @@ for (let i = 0; i < config.BLOCKS; i++) {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
         <p>已完成 ${i + 1} / ${config.BLOCKS} 个小节</p>
-        <p>试次间间隔的形式还没想好</p>
+        <p>您现在可以稍作休息</p>
+        <p>${config.BLOCK_DURATION / 1000} 秒后将自动开始下一个小节</p>
       `,
-      choices: ['继续']
+      choices: ['立即开始'],
+      on_start: () => exp.pluginAPI.setTimeout(() => exp.finishTrial(), config.BLOCK_DURATION)
     })
   }
 }
