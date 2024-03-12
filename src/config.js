@@ -1,7 +1,7 @@
 export default {
-  TRIAL_DURATION: 50, // 试次间间隔，即十字出现时间，应为 500ms
+  TRIAL_DURATION: 500, // 试次间间隔，即十字出现时间，应为 500ms
   BLOCKS: 3, // block 数，应为 3 个
-  STUDY_TEST_DURATION: 3 * 1000, // 练习阶段和学习阶段的间隔，应为 30 * 1000ms
+  STUDY_TEST_DURATION: 30 * 1000, // 练习阶段和学习阶段的间隔，应为 30 * 1000ms
   // --- 服务器相关 ---
   SERVER: 'https://expapi.leafyee.xyz', // 服务器地址，应为 'https://expapi.leafyee.xyz'
   DEV: true, // 是否为开发阶段（与打印一些调试信息有关）
