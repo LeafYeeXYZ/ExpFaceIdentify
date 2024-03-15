@@ -44,10 +44,7 @@ static/
     // 运行实验
     await exp.run(timeline)
     // 显示正在上传数据页面
-    document.body.innerHTML = `
-      <h1>正在上传实验数据</h1>
-      <h1>请勿关闭网页</h1>
-    `
+    document.body.innerHTML = config.HTML_UPLOADING
     // 获取并处理实验数据
     const data = calcData(exp.data.get())
     data.device = {
@@ -70,15 +67,9 @@ static/
       }
     }
     // 显示结束页面
-    document.body.innerHTML = `
-      <h1>实验数据已上传</h1>
-      <h1>感谢您的参与</h1>
-      <h1>您现在可以关闭网页</h1>
-    `
+    document.body.innerHTML = config.HTML_ENDING
   } catch (err) {
-    document.body.innerHTML = `
-      <h1>实验出错，请联系主试</h1>
-      <p>错误信息：${err}</p>`
+    document.body.innerHTML = config.HTML_ERROR.replace(/@@@/, err)
   }
 })()
 

@@ -1,3 +1,5 @@
+import config from "./config"
+
 const timeline = [
   { // 全屏提示
     type: jsPsychFullscreen,
@@ -105,7 +107,12 @@ const timeline = [
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <p>实验即将正式开始</p>
-      <p>指导语还没写好</p>
+      <p>实验将分为 ${config.BLOCKS} 个小节进行，每个小节又分为三个部分</p>
+      <p>在第一个部分中，您会看到一些人脸图片，您需要在 ${config.STUDY_IMAGE_DURATION / 1000} 秒内<b>尽快</b>判断照片中人物的性别，并尽量记住图中人物</p>
+      <p>在第二个部分中，您需要在 ${config.STUDY_TEST_DURATION / 1000} 秒内，在<b>保证正确</b>的前提下<b>尽量多</b>地完成一些计算题</p>
+      <p>在第三个部分中，您也会看到一些人脸图片，您需要<b>尽快</b>判断照片中人物是否在第一部分中出现过</p>
+      <p>每个小节结束后，您会有一些时间休息</p>
+      <p>请尽量专注，并尽量在安静的环境中进行实验</p>
     `,
     choices: ['开始实验'],
   }
