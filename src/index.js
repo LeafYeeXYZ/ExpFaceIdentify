@@ -52,17 +52,16 @@ static/
       height: window.screen.height,
       min: Math.min(window.screen.width, window.screen.height)
     }
+    // 开发环境下打印数据
+    config.DEV && console.log('准备上传', data)
     // 上传数据
     const uploadUrl = `${config.SERVER}/submit?data=${JSON.stringify(data)}`
-    config.DEV && console.log('准备上传', data)
-    await fetch(uploadUrl).catch(() => fetch(uploadUrl)).catch(() => fetch(uploadUrl))
-    // 显示结束页面
-    document.body.innerHTML = config.HTML_ENDING
+    await fetch(uploadUrl)
+      .catch(() => fetch(uploadUrl))
+      .catch(() => fetch(uploadUrl))
+      .then(() => document.body.innerHTML = config.HTML_ENDING)
+      .catch(err => document.body.innerHTML = config.HTML_ERROR_UPLOAD.replace(/@@@/, err))
   } catch (err) {
-    document.body.innerHTML = config.HTML_ERROR.replace(/@@@/, err)
+    document.body.innerHTML = config.HTML_ERROR_EXP.replace(/@@@/, err)
   }
 })()
-
-
-
-
