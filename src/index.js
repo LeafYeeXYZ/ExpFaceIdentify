@@ -53,19 +53,9 @@ static/
       min: Math.min(window.screen.width, window.screen.height)
     }
     // 上传数据
+    const uploadUrl = `${config.SERVER}/submit?data=${JSON.stringify(data)}`
     config.DEV && console.log('准备上传', data)
-    try {
-      config.DEV && console.log('第一次尝试上传数据')
-      await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
-    } catch (err) {
-      try {
-        config.DEV && console.log('第二次尝试上传数据')
-        await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
-      } catch (err) {
-        config.DEV && console.log('第三次尝试上传数据')
-        await fetch(`${config.SERVER}/submit?data=${JSON.stringify(data)}`)
-      }
-    }
+    await fetch(uploadUrl).catch(() => fetch(uploadUrl)).catch(() => fetch(uploadUrl))
     // 显示结束页面
     document.body.innerHTML = config.HTML_ENDING
   } catch (err) {
