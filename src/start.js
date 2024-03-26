@@ -1,4 +1,5 @@
 import config from "./config"
+import { genderTarget as gender } from "./stimulus"
 
 const timeline = [
   { // 全屏提示
@@ -26,8 +27,9 @@ const timeline = [
       [
         {
           name: 'gender',
-          type: 'drop-down',
+          type: 'multi-choice',
           prompt: '您的性别',
+          columns: 0,
           options: ['男', '女', '其他'],
           required: true
         },
@@ -52,48 +54,35 @@ const timeline = [
       [
         {
           name: 'cnStarFamiliar',
-          type: 'likert',
-          prompt: '您对中国明星的熟悉程度',
+          type: 'multi-choice',
+          prompt: `这些人物中, 您认识多少个: ${ gender === '男' ? config.CN_STAR_M.join('、') : config.CN_STAR_F.join('、') }`,
           required: true,
-          likert_scale_min_label: '完全不熟悉',
-          likert_scale_max_label: '非常熟悉',
-          likert_scale_values: [
-            { value: 1 },
-            { value: 2 },
-            { value: 3 },
-            { value: 4 },
-            { value: 5 }
-          ]
+          options: ['0', '1', '2', '3', '4', '5', '6'],
+          columns: 0
         },
         {
           name: 'krStarFamiliar',
-          type: 'likert',
-          prompt: '您对韩国明星的熟悉程度',
+          type: 'multi-choice',
+          prompt: `这些人物中, 您认识多少个: ${ gender === '男' ? config.KR_STAR_M.join('、') : config.KR_STAR_F.join('、') }`,
           required: true,
-          likert_scale_min_label: '完全不熟悉',
-          likert_scale_max_label: '非常熟悉',
-          likert_scale_values: [
-            { value: 1 },
-            { value: 2 },
-            { value: 3 },
-            { value: 4 },
-            { value: 5 }
-          ]
+          options: ['0', '1', '2', '3', '4', '5', '6'],
+          columns: 0
         },
         {
           name: 'usStarFamiliar',
-          type: 'likert',
-          prompt: '您对美国明星的熟悉程度',
+          type: 'multi-choice',
+          prompt: `这些人物中, 您认识多少个: ${ gender === '男' ? config.US_STAR_M.join('、') : config.US_STAR_F.join('、') }`,
           required: true,
-          likert_scale_min_label: '完全不熟悉',
-          likert_scale_max_label: '非常熟悉',
-          likert_scale_values: [
-            { value: 1 },
-            { value: 2 },
-            { value: 3 },
-            { value: 4 },
-            { value: 5 }
-          ]
+          options: ['0', '1', '2', '3', '4', '5', '6'],
+          columns: 0
+        },
+        {
+          name: 'cnNormFamiliar',
+          type: 'multi-choice',
+          prompt: `这些人物中, 您认识多少个: ${ gender === '男' ? config.CN_NORM_M.join('、') : config.CN_NORM_F.join('、') }`,
+          required: true,
+          options: ['0', '1', '2', '3', '4', '5', '6'],
+          columns: 0
         }
       ]
     ],

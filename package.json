@@ -1,5 +1,5 @@
 {
-  "name": "jspsych-face-identify",
+  "name": "exp-face-identify",
   "version": "1.0.0",
   "description": "面孔再认实验程序",
   "source": "./src/index.html",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/LeafYeeXYZ/jsPsych-Face-Identify.git"
+    "url": "git+ssh://git@github.com/LeafYeeXYZ/ExpFaceIdentify.git"
   },
   "author": "LeafYeeXYZ",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/LeafYeeXYZ/jsPsych-Face-Identify/issues"
+    "url": "https://github.com/LeafYeeXYZ/ExpFaceIdentify/issues"
   },
-  "homepage": "https://github.com/LeafYeeXYZ/jsPsych-Face-Identify#readme",
+  "homepage": "https://github.com/LeafYeeXYZ/ExpFaceIdentify#readme",
   "devDependencies": {
     "parcel": "^2.12.0",
     "parcel-reporter-static-files-copy": "^1.5.3"
