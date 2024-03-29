@@ -9,6 +9,8 @@
 | `DEV` | 是否开发模式 / Development Mode |
 | 其他 / Others | 请参考注释 / Please refer to the comments |
 
+> 服务端见[这个项目](https://github.com/LeafYeeXYZ/ExpFaceIdentifyServer) / Data server see [this project](https://github.com/LeafYeeXYZ/ExpFaceIdentifyServer)
+
 ### 安装依赖 / Install Dependencies
 ```bash
 npm i
