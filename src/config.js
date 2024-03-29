@@ -1,17 +1,16 @@
 const DEV = false // 一键调整参数
-
 export default {
   // --- 调试参数 ---
   STAGE: '开发阶段数据', // 标记实验状态，开发阶段数据 → 预测数据 → 有效数据
   TRIAL_DURATION: DEV ? 50 : 500, // 试次间间隔，即十字出现时间，应为 500ms
   STUDY_TEST_DURATION: DEV ? 3 * 1000 : 30 * 1000, // 练习阶段和学习阶段的间隔，应为 30 * 1000ms
-  NO_RIGHT_CLICK: DEV ? false : true, // 是否禁用右键、选中、长按等操作
+  NO_RIGHT_CLICK: !DEV, // 是否禁用右键、选中、长按等操作
   BLOCKS: 4, // block 数，应为 4 个
   BLOCK_DURATION: 20 * 1000, // block 间最大间隔，应为 20 * 1000ms
   STUDY_IMAGE_DURATION: 3 * 1000, // 学习阶段的图片最长呈现时间，应为 3 * 1000ms
   TOFIXED: 4, // 上传的数据保留的小数点位数
   SHOW_BAR: false, // 是否显示顶部的实验进度条
-  SERVER: 'https://expapi.leafyee.xyz', // 服务器地址，应为 'https://expapi.leafyee.xyz'
+  SERVER: 'https://expapi.leafyee.xyz', // 服务器地址
   BLOCKS_ORDER: ['cnStar', 'krStar', 'cnNorm', 'usStar'].sort(() => Math.random() - 0.5), // block 的顺序
   DEV, // 是否为开发阶段（与打印一些调试信息有关）
   // --- 明星名单 ---
