@@ -9,57 +9,68 @@ const fs = require('fs').promises
 const path = require('path')
 const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
 
+// ---------------------------------------------------
+
+// const A = path.resolve(__dirname, 'CN_star/M1_1.jpg')
+// const B = path.resolve(__dirname, 'CN_star/M1_2.jpg')
+// match(A, B).then(console.log('done')).catch(console.error('error'))
+// 注意: 不管是测试还是实际运行, 请一次只运行一个函数!!!!!
+
+// ---------------------------------------------------
+
+// // 测试用 match 函数
+// async function match() {
+//   return new Promise((resolve, _reject) => {
+//     setTimeout(() => {
+//       resolve({ result: { score: parseInt(Math.random() * 100 + 1) } })
+//     }, 10)
+//   })
+// }
+// // 测试
+// // withinSubjSimi(['CN_star', 'KR_star', 'US_star', 'CN_norm'])
+// // betweenSubjSimi(['CN_star', 'KR_star', 'US_star', 'CN_norm'])
+// withinSubjSimiSingle('CN_star', 'M', '1')
+
+// ---------------------------------------------------
+
 /**
  * 两张人脸图片对比
  * @param {string} imgPathA 图片 A 的绝对路径
  * @param {string} imgPathB 图片 B 的绝对路径
  * @returns {Promise<object>} 人脸识别结果
  */
-// async function match(imgPathA, imgPathB) {
-//   try {
-//     // 读取图片文件
-//     const imgA = (await fs.readFile(imgPathA)).toString('base64')
-//     const imgB = (await fs.readFile(imgPathB)).toString('base64')
-//     // 调用百度 AI SDK 的人脸识别接口
-//     const result = await client.match([{
-//       image: imgA,
-//       image_type: 'BASE64'
-//     }, {
-//       image: imgB,
-//       image_type: 'BASE64'
-//     }])
-//     // 附加一些额外信息
-//     result.imgs = [imgPathA, imgPathB]
-//     result.time = new Date().toLocaleString()
-//     // 如果成功, 将结果保存到日志文件 result.log, 并返回结果
-//     if (result.error_code == 0) {
-//       const log = path.resolve(__dirname, 'result.log')
-//       await fs.appendFile(log, `${JSON.stringify(result)}\n`)
-//       return result
-//     } else {
-//       // 如果失败, 抛出错误
-//       throw result
-//     }
-//   } catch (err) {
-//     // 将错误保存到日志文件 error.log
-//     const log = path.resolve(__dirname, 'error.log')
-//     await fs.appendFile(log, `${JSON.stringify(err)}\n`)
-//     throw err
-//   }
-// }
-// 测试用 match 函数
-async function match() {
-  return new Promise((resolve, _reject) => {
-    setTimeout(() => {
-      resolve({ result: { score: parseInt(Math.random() * 100 + 1) } })
-    }, 10)
-  })
+async function match(imgPathA, imgPathB) {
+  try {
+    // 读取图片文件
+    const imgA = (await fs.readFile(imgPathA)).toString('base64')
+    const imgB = (await fs.readFile(imgPathB)).toString('base64')
+    // 调用百度 AI SDK 的人脸识别接口
+    const result = await client.match([{
+      image: imgA,
+      image_type: 'BASE64'
+    }, {
+      image: imgB,
+      image_type: 'BASE64'
+    }])
+    // 附加一些额外信息
+    result.imgs = [imgPathA, imgPathB]
+    result.time = new Date().toLocaleString()
+    // 如果成功, 将结果保存到日志文件 result.log, 并返回结果
+    if (result.error_code == 0) {
+      const log = path.resolve(__dirname, 'result.log')
+      await fs.appendFile(log, `${JSON.stringify(result)}\n`)
+      return result
+    } else {
+      // 如果失败, 抛出错误
+      throw result
+    }
+  } catch (err) {
+    // 将错误保存到日志文件 error.log
+    const log = path.resolve(__dirname, 'error.log')
+    await fs.appendFile(log, `${JSON.stringify(err)}\n`)
+    throw err
+  }
 }
-// 测试
-// withinSubjSimi(['CN_star', 'KR_star', 'US_star', 'CN_norm'])
-// betweenSubjSimi(['CN_star', 'KR_star', 'US_star', 'CN_norm'])
-withinSubjSimiSingle('CN_star', 'M', '1')
-// 注意: 不管是测试还是实际运行, 请一次只运行一个函数!!!!!
 
 /**
  * 计算单个人内部的相似度
