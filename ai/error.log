@@ -6,3 +6,4 @@
 {"error_code":14,"error_msg":"IAM Certification failed"}
 {"error_code":14,"error_msg":"IAM Certification failed"}
 {"error_code":222202,"error_msg":"pic not has face","log_id":232101861,"timestamp":1711785832,"cached":0,"result":null,"imgs":["D:\\Github\\ExpFaceIdentify\\ai\\CN_norm\\F1_1.jpg","D:\\Github\\ExpFaceIdentify\\ai\\CN_norm\\F1_2.jpg"],"time":"2024/3/30 16:03:51"}
+{"error_code":18,"error_msg":"Open api qps request limit reached","imgs":["D:\\Github\\ExpFaceIdentify\\ai\\CN_star\\M3_1.jpg","D:\\Github\\ExpFaceIdentify\\ai\\CN_star\\M4_1.jpg"],"time":"2024/4/7 22:37:06"}

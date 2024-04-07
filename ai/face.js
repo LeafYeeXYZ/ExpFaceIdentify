@@ -25,8 +25,8 @@ const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
 //   })
 // }
 // // 测试
-// await withinSubjSimi(['CN_star'])
-// await betweenSubjSimi(['CN_star'])
+// withinSubjSimi(['KR_star'])
+// betweenSubjSimi(['KR_star'])
 // withinSubjSimiSingle('CN_star', 'M', '1')
 
 // ---------------------------------------------------
@@ -38,6 +38,7 @@ const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
  * @returns {Promise<object>} 人脸识别结果
  */
 async function match(imgPathA, imgPathB) {
+  await new Promise(resolve => setTimeout(resolve, 1000))
   try {
     // 读取图片文件
     const imgA = (await fs.readFile(imgPathA)).toString('base64')
