@@ -16,8 +16,6 @@ const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
 // match(A, B).then(console.log('done')).catch(console.error('error'))
 // 注意: 不管是测试还是实际运行, 请一次只运行一个函数!!!!!
 
-// ---------------------------------------------------
-
 // // 测试用 match 函数
 // async function match() {
 //   return new Promise((resolve, _reject) => {
@@ -27,8 +25,8 @@ const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
 //   })
 // }
 // // 测试
-// // withinSubjSimi(['CN_star', 'KR_star', 'US_star', 'CN_norm'])
-// // betweenSubjSimi(['CN_star', 'KR_star', 'US_star', 'CN_norm'])
+// await withinSubjSimi(['CN_star'])
+// await betweenSubjSimi(['CN_star'])
 // withinSubjSimiSingle('CN_star', 'M', '1')
 
 // ---------------------------------------------------
