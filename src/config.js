@@ -3,7 +3,7 @@ export default {
   // --- 调试参数 ---
   STAGE: '开发阶段数据', // 标记实验状态，开发阶段数据 → 预测数据 → 有效数据
   TRIAL_DURATION: DEV ? 50 : 500, // 试次间间隔，即十字出现时间，应为 500ms
-  STUDY_TEST_DURATION: DEV ? 3 * 1000 : 30 * 1000, // 练习阶段和学习阶段的间隔，应为 30 * 1000ms
+  STUDY_TEST_DURATION: DEV ? 5 * 1000 : 30 * 1000, // 练习阶段和学习阶段的间隔，应为 30 * 1000ms
   NO_RIGHT_CLICK: !DEV, // 是否禁用右键、选中、长按等操作
   BLOCKS: 4, // block 数，应为 4 个
   BLOCK_DURATION: 20 * 1000, // block 间最大间隔，应为 20 * 1000ms

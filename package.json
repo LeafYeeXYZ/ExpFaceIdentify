@@ -4,7 +4,7 @@
   "description": "面孔再认实验程序",
   "source": "./src/index.html",
   "scripts": {
-    "start": "parcel",
+    "dev": "parcel",
     "build": "parcel build",
     "ai": "node ./ai/face.js"
   },
