@@ -25,7 +25,7 @@ const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
 //   })
 // }
 // // 测试
-withinSubjSimi(['KR_star'])
+// withinSubjSimi(['KR_star'])
 // betweenSubjSimi(['KR_star'])
 // withinSubjSimiSingle('CN_star', 'M', '1')
 
@@ -200,5 +200,29 @@ async function betweenSubjSimi(target) {
     await fs.writeFile(path.resolve(__dirname, `results/between${t}.json`), JSON.stringify(result[t]))
   }
   
+  return result
+}
+
+/**
+ * 计算 50 个相互的相似度
+ * @info 结果会保存到 ./result/between50P_Pres.json / ./result/between50P_Star.json
+ * @info 算法：每组比较 50 次 (单个人比较 2 次), 求平均值
+ * @param {string} prefix 文件名前缀
+ * @param {string} folder 文件夹名
+ */
+async function fiftySimi(prefix, folder) {
+  const src = path.resolve(__dirname, folder)
+  const result = {
+    Mean: 0
+  }
+  for (i = 0; i < 50; i++) {
+    const imgPathA = path.resolve(src, `${prefix}${i + 1}.jpg`)
+    const imgPathB = path.resolve(src, `${prefix}${(i === 49) ? 1 : i + 2}.jpg`)
+    const res = await match(imgPathA, imgPathB)
+    result[`${i + 1}_${(i === 49) ? 1 : i + 2}`] = +res.result.score
+    result.Mean += +res.result.score
+  }
+  result.Mean /= 50
+  await fs.writeFile(path.resolve(__dirname, `results/between${folder}.json`), JSON.stringify(result))
   return result
 }
