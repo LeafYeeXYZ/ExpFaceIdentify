@@ -25,8 +25,8 @@ const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
 //   })
 // }
 // // 测试
-// withinSubjSimi(['KR_star'])
-// betweenSubjSimi(['KR_star'])
+// withinSubjSimi(['US_star'])
+betweenSubjSimi(['US_star'])
 // withinSubjSimiSingle('CN_star', 'M', '1')
 
 // ---------------------------------------------------

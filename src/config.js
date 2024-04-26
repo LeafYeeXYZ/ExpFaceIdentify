@@ -20,7 +20,7 @@ export default {
   KR_STAR_F: ['裴智秀', 'somi', '金泰妍', 'jennie', 'iu', 'jisoo'], // 韩国明星女性名单
   // ---
   US_STAR_M: ['Jsutinbieber', 'Troye Sivan', 'Timothee Chalamet', 'Tom Holland', 'Tom Felton', 'Charlie Puth'], // 美国明星男性名单
-  US_STAR_F: ['Lily', 'Lucy', 'Mary', 'Jane', 'Emma', 'Grace'], // 美国明星女性名单
+  US_STAR_F: ['Ariana Grande', 'Billie Eilish', 'Kylie Jenner', 'Lady Gaga', 'Katy Perry', 'Selena Gomez'], // 美国明星女性名单 
   CN_NORM_M: ['小明', '小红', '小刚', '小李', '小张', '小王'], // 中国普通人男性名单, 不一定用
   CN_NORM_F: ['小丽', '小芳', '小美', '小娟', '小婷', '小霞'], // 中国普通人女性名单, 不一定用
   // --- 页面显示相关 ---
