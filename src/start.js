@@ -60,6 +60,8 @@ const timeline = [
           options: ['0', '1', '2', '3', '4', '5', '6'],
           columns: 0
         },
+      ],
+      [
         {
           name: 'krStarFamiliar',
           type: 'multi-choice',
@@ -68,6 +70,8 @@ const timeline = [
           options: ['0', '1', '2', '3', '4', '5', '6'],
           columns: 0
         },
+      ],
+      [
         {
           name: 'usStarFamiliar',
           type: 'multi-choice',
@@ -76,6 +80,8 @@ const timeline = [
           options: ['0', '1', '2', '3', '4', '5', '6'],
           columns: 0
         },
+      ],
+      [
         {
           name: 'cnNormFamiliar',
           type: 'multi-choice',
@@ -84,8 +90,10 @@ const timeline = [
           options: ['0', '1', '2', '3', '4', '5', '6'],
           columns: 0
         }
-      ]
+      ],
     ],
+    button_label_back: '上一页',
+    button_label_next: '下一页',
     button_label_finish: '继续',
     required_error: '请填写此项',
     data: {

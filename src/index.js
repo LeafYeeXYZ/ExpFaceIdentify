@@ -60,7 +60,10 @@ static/
       .catch(() => fetch(uploadUrl))
       .catch(() => fetch(uploadUrl))
       .then(() => document.body.innerHTML = config.HTML_ENDING)
-      .catch(err => document.body.innerHTML = config.HTML_ERROR_UPLOAD.replace(/@@@/, err))
+      .catch(err => {
+        document.body.innerHTML = config.HTML_ERROR_UPLOAD.replace(/@@@/, err)
+        console.log(data)
+      })
   } catch (err) {
     document.body.innerHTML = config.HTML_ERROR_EXP.replace(/@@@/, err)
   }
