@@ -21,8 +21,8 @@ export default {
   // ---
   US_STAR_M: ['Jsutinbieber', 'Troye Sivan', 'Timothee Chalamet', 'Tom Holland', 'Tom Felton', 'Charlie Puth'], // 美国明星男性名单
   US_STAR_F: ['Ariana Grande', 'Billie Eilish', 'Kylie Jenner', 'Lady Gaga', 'Katy Perry', 'Selena Gomez'], // 美国明星女性名单 
-  CN_NORM_M: ['小明', '小红', '小刚', '小李', '小张', '小王'], // 中国普通人男性名单, 不一定用
-  CN_NORM_F: ['小丽', '小芳', '小美', '小娟', '小婷', '小霞'], // 中国普通人女性名单, 不一定用
+  CN_NORM_M: ['赵云侠', '李筱奎', '孔九典', '于鹤真', '曹九台', '王鹤江'], // 中国普通人(德云社不知名演员)男性名单
+  CN_NORM_F: ['彭华茂', '许燕', '陈师韬', '韩卓', '骆方', '王芳'], // 中国普通人(北师大心理学部老师)女性名单
   // --- 页面显示相关 ---
   HTML_UPLOADING: `
     <h1>正在上传实验数据</h1>
