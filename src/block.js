@@ -37,7 +37,7 @@ class studyTrial {
     this.stimulus = `
       <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
       <p>请尽量记住图中人物</p>
-      <p>并尽快判断人物的性别</p>
+      <p>并判断人物的性别</p>
     `
     this.choices = ['男性', '女性']
     this.on_start = function () {
@@ -140,7 +140,7 @@ function generateBlock(block) {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <p>请尽量记住图中人物</p>
-      <p>并尽快判断人物的性别</p>
+      <p>并判断人物的性别</p>
       <p>每张照片最多呈现 ${config.STUDY_IMAGE_DURATION / 1000} 秒</p>
       <p>超时则视为回答错误</p>
     `,
