@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@parcel/config-default':
+        specifier: ^2.12.0
+        version: 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
       baidu-aip-sdk:
         specifier: ^4.16.15
         version: 4.16.15

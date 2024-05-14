@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/LeafYeeXYZ/ExpFaceIdentify#readme",
   "devDependencies": {
+    "@parcel/config-default": "^2.12.0",
     "baidu-aip-sdk": "^4.16.15",
     "parcel": "^2.12.0",
     "parcel-reporter-static-files-copy": "^1.5.3"
