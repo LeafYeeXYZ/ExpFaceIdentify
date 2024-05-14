@@ -13,15 +13,16 @@
 
 ### 安装依赖 / Install Dependencies
 ```bash
-npm i
+npm i -g pnpm
+pnpm i
 ```
 
 ### 启动 / Start Server
 ```bash
-npm start
+pnpm start
 ```
 
 ### 打包 / Build
 ```bash
-npm run build
+pnpm build
 ```
