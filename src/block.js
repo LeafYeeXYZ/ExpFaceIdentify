@@ -20,7 +20,7 @@ function insertDurationTrial(timeline) {
       type: jsPsychHtmlKeyboardResponse,
       choices: "NO_KEYS",
       stimulus: `
-        <img src="/cross.jpg" style="width: 200px; height: 200px; margin: 20px 0;">
+        <p style="width: 200px; height: 200px; line-height: 200px; text-align: center; font-weight: bold; transform: scale(2.5);">+</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
       `,
@@ -123,7 +123,7 @@ function generateBlock(block) {
   // 预加载图片
   timeline.push({
     type: jsPsychPreload,
-    images: [...stimulus[block].f[0], ...stimulus[block].f[1], ...stimulus[block].m[0], ...stimulus[block].m[1], ...stimulus[block].m[2], ...stimulus[block].m[3], ...stimulus[block].m[4], ...stimulus[block].m[5], './cross.jpg']
+    images: [...stimulus[block].f[0], ...stimulus[block].f[1], ...stimulus[block].m[0], ...stimulus[block].m[1], ...stimulus[block].m[2], ...stimulus[block].m[3], ...stimulus[block].m[4], ...stimulus[block].m[5]]
   })
   // 标记目标男性
   const targetM = []

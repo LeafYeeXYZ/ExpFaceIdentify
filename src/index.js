@@ -29,7 +29,6 @@ src/
   data.js --- 原始数据处理函数
   config.js --- 实验参数配置
 static/
-  cross.jpg --- 黑色十字图片
   CN_star --- 中国明星照片
   KR_star --- 韩国明星照片
   US_star --- 美国明星照片
