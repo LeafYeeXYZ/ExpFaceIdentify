@@ -35,7 +35,7 @@ class studyTrial {
   constructor(stm) {
     this.type = jsPsychHtmlButtonResponse
     this.stimulus = `
-      <img src="${stm}" style="width: 200px; height: 200px; margin: 20px 0;">
+      <img src="${stm}" style="width: 300px; height: 300px; margin: 20px 0;">
       <p>请尽量记住图中人物</p>
       <p>并判断人物的性别</p>
     `

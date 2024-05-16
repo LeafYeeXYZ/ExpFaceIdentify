@@ -1,30 +1,45 @@
 /**
+ * 数据导出
+ */
+const fs = require('fs').promises
+const path = require('path')
+
+// void async function() {
+//   const between50P_Pres = await fs.readFile(path.resolve(__dirname, 'results/done.between50P_Pres.json')).then(data => JSON.parse(data))
+//   const between50P_Star = await fs.readFile(path.resolve(__dirname, 'results/done.between50P_Star.json')).then(data => JSON.parse(data))
+//   delete between50P_Pres.Mean
+//   delete between50P_Star.Mean
+//   const data = []
+//   for (const key in between50P_Pres) {
+//     data.push({
+//       type: 'Pres',
+//       person: key,
+//       score: between50P_Pres[key],
+//     })
+//   }
+//   for (const key in between50P_Star) {
+//     data.push({
+//       type: 'Star',
+//       person: key,
+//       score: between50P_Star[key],
+//     })
+//   }
+//   const csv = 'type,person,score\n' + data.map(d => `${d.type},${d.person},${d.score}`).join('\n')
+//   await fs.writeFile(path.resolve(__dirname, 'results/exp2.csv'), csv)
+// }()
+
+/**
  * 实验 2 : 通过 AI 人脸识别判断两张人脸的相似度
  */
 
 // 引入百度 AI SDK
-const { APP_ID, API_KEY, SECRET_KEY } = require('./secret.js')
-const AipFaceClient = require('baidu-aip-sdk').face
-const fs = require('fs').promises
-const path = require('path')
-const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
+// const { APP_ID, API_KEY, SECRET_KEY } = require('./secret.js')
+// const AipFaceClient = require('baidu-aip-sdk').face
+// const client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY)
 
 // ---------------------------------------------------
 
-// const A = path.resolve(__dirname, 'CN_star/M1_1.jpg')
-// const B = path.resolve(__dirname, 'CN_star/M1_2.jpg')
-// match(A, B).then(console.log('done')).catch(console.error('error'))
 // 注意: 不管是测试还是实际运行, 请一次只运行一个函数!!!!!
-
-// // 测试用 match 函数
-// async function match() {
-//   return new Promise((resolve, _reject) => {
-//     setTimeout(() => {
-//       resolve({ result: { score: parseInt(Math.random() * 100 + 1) } })
-//     }, 10)
-//   })
-// }
-// // 测试
 // withinSubjSimi(['CN_norm'])
 // betweenSubjSimi(['CN_norm'])
 // withinSubjSimiSingle('CN_star', 'M', '1')
