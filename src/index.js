@@ -25,7 +25,7 @@ src/
   start.js --- 指导语和人口学信息试次
   block.js --- 正式实验试次
   end.js --- 结束语和退出全屏试次
-  stimulus.js --- 存储刺激的路径
+  stimulus.js --- 存储刺激的路径 --- 发现女性目标刺激偏多, 手动调了一下概率
   data.js --- 原始数据处理函数
   config.js --- 实验参数配置
 static/
