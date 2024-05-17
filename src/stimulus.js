@@ -116,6 +116,6 @@ const stimulusFemale = {
   }
 }
 // 定义主刺激性别
-export const genderTarget = Math.random() > 0.45 ? '男' : '女'
+export const genderTarget = Math.random() > 0.4 ? '男' : '女'
 // 导出刺激
 export default genderTarget === '男' ? stimulusMale : stimulusFemale
